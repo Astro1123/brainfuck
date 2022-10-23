@@ -2,7 +2,7 @@
 #include <stdlib.h>			/* malloc(), free() */
 #include <string.h>			/* strlen(), strcpy() */
 
-#define INITIAL 4096
+#define INITIAL 30000
 #define CODE_SIZE 4096
 #define TRUE 1
 #define FALSE 0
@@ -76,7 +76,7 @@ static int execute(unsigned char *memory, char *code) {
 					printf("realloc: failed to allocate memory\n");
 					ret = ERROR;
 					break;
-				}	
+				}
 			}
 		} else if (c == '<') {
 			if (index-- == 0) {
@@ -108,8 +108,11 @@ static int execute(unsigned char *memory, char *code) {
 					}
 					if (!count) break;
 					codeIndex++;
+					if (code[codeIndex] == '\0' || codeIndex >= CODE_SIZE) {
+						printf("error: ']' is not found\n");
+						return ERROR;
+					}
 				}
-				codeIndex--;
 			}
 		} else if (c == ']') {
 			if (memory[index]) {
@@ -121,7 +124,10 @@ static int execute(unsigned char *memory, char *code) {
 						count++;
 					}
 					if (!count) break;
-					codeIndex--;
+					if (codeIndex-- == 0) {
+						printf("error: '[' is not found\n");
+						return ERROR;
+					}
 				}
 			}
 		}
