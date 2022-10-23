@@ -13,6 +13,13 @@
 
 static long memsize;
 
+static int makeMem(unsigned char**);
+static int resizeMem(unsigned char**);
+static int getString(char*, long);
+static void initialization(unsigned char*);
+static int execute(unsigned char*, char*);
+static int inputFile(char*, char*, long);
+
 static int makeMem(unsigned char **memory) {
 	memsize = INITIAL;
 	*memory = (unsigned char *)malloc(memsize * sizeof(unsigned char));
