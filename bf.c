@@ -2,7 +2,7 @@
 #include <stdlib.h>			/* malloc(), free() */
 #include <string.h>			/* strlen(), strcpy() */
 
-#define INITIAL 1
+#define INITIAL 4096
 #define CODE_SIZE 4096
 #define TRUE 1
 #define FALSE 0
